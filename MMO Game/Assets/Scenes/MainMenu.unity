@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.2257134, b: 0.30692226, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -123,8 +123,9 @@ GameObject:
   - component: {fileID: 201488942}
   - component: {fileID: 201488941}
   - component: {fileID: 201488940}
+  - component: {fileID: 201488943}
   m_Layer: 0
-  m_Name: Main Camera
+  m_Name: Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -190,6 +191,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &201488943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 201488939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 504506f8e42159f488a23683ce69868f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  distance: 10
+  height: 5
+  heightDamping: 2
+  rotationDamping: 3
 --- !u!1 &226927301
 GameObject:
   m_ObjectHideFlags: 0
@@ -1338,11 +1355,13 @@ MonoBehaviour:
   matchSize: 4
   isNetworkActive: 0
   matchMaker: {fileID: 0}
-  m_DebugServer: 1
+  m_DebugServer: 0
   ConsoleConfiguration: {fileID: 11400000, guid: 258121c5ea69f8f4e9daf54514c028f2,
     type: 2}
   m_ClientSettings: {fileID: 11400000, guid: fba4d0598441e5e48bd7cd96cac2ecad, type: 2}
   m_ServerSettings: {fileID: 11400000, guid: f8f945d5e3e615c4ab7a50174beb66ab, type: 2}
+  RoomID: -1
+  username: 
 --- !u!4 &1519786573
 Transform:
   m_ObjectHideFlags: 0

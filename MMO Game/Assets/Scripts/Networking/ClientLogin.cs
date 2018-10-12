@@ -7,7 +7,7 @@ using UnityEngine.Networking;
 using UnityEngine.UI;
 
 using TMPro;
-public class ClientLogin : MonoSingleton<ClientLogin> {
+public class ClientLogin : MonoBehaviour {
     [SerializeField] private Button m_LoginButton;
     [SerializeField] private TMP_InputField m_InputField;
 
@@ -17,9 +17,13 @@ public class ClientLogin : MonoSingleton<ClientLogin> {
 
     void Awake() {
         m_MMOManager = GameObject.Find("NetworkManager").GetComponent<MMONetworkManager>();
-        m_LoginButton.onClick.AddListener( delegate {
-            Login(m_InputField.text);
-        });
+        m_LoginButton.onClick.AddListener(OnButtonClick);
+    }
+
+    void OnButtonClick() {
+        Username = m_InputField.text;
+        m_MMOManager.username = Username;
+        m_MMOManager.StartClient();
     }
 
     void Login(string username) {

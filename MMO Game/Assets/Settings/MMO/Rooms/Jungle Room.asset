@@ -13,5 +13,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ServerRoomName: 
   HostAddress: localhost
-  HostOnlineScene: Hub
-  Port: 7777
+  HostOnlineScene: Jungle
+  Port: 7779

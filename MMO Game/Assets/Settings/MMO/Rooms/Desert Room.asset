@@ -13,5 +13,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ServerRoomName: Desert
   HostAddress: localhost
-  HostOnlineScene: Hub
+  HostOnlineScene: Desert
   Port: 7777

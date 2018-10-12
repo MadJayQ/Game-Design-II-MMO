@@ -1,1 +1,1 @@
-"MMO Game.exe" -id 0
+"MMO Game.exe" -batchmode -nographics -id 0

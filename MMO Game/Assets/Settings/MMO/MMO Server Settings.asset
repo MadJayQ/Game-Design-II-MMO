@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Name: MMO Server Settings
   m_EditorClassIdentifier: 
   ServerRoomConfigurations:
+  - {fileID: 11400000, guid: 00b49e1759d0c8e47bb59a68712d2cd1, type: 2}
   - {fileID: 11400000, guid: d0584c952f26ee54d858811a2bdf52b9, type: 2}
+  - {fileID: 11400000, guid: a0faf2c654824b84c8c3349e647f8851, type: 2}

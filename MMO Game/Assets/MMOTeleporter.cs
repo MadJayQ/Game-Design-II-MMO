@@ -7,7 +7,16 @@ using UnityEngine.Networking;
 public class MMOTeleporter : NetworkBehaviour {
 	
 	// Update is called once per frame
-	void Update () {
-		
+
+	public int targetServerID;
+	
+	void OnTriggerEnter(Collider other) {
+		if(!isServer) return;
+
+		if(other.tag == "Player") {
+			MMOPlayer player = other.gameObject.GetComponent<MMOPlayer>();
+
+			player.ChangeWorlds(targetServerID);
+		}
 	}
 }

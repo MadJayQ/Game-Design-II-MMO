@@ -28,11 +28,13 @@ public class MMONetworkManager : NetworkManager {
 	[SerializeField] private ClientSettings m_ClientSettings;
 	[SerializeField] private ServerSettings m_ServerSettings;
 
-	private int m_RoomID = -1;
+	public int RoomID = -1;
+
+	public String username;
 
 	public override void OnClientConnect(NetworkConnection conn) {
 		NewPlayerMessage msg = new NewPlayerMessage();
-		msg.PlayerName = ClientLogin.Instance.Username;
+		msg.PlayerName = username;
 		var res = ClientScene.AddPlayer(conn, 0, msg);	
 	}
 
@@ -55,11 +57,17 @@ public class MMONetworkManager : NetworkManager {
 				playerControllerId
 			);
 		}
+	}
 
+	public override void OnClientSceneChanged(NetworkConnection conn) {
 
 	}
 	private void InitializeClient() {
-
+		var defaultConfig = m_ServerSettings.ServerRoomConfigurations[0];
+		offlineScene = m_ClientSettings.OfflineScene;
+		onlineScene = defaultConfig.HostOnlineScene;
+		networkAddress = defaultConfig.HostAddress;
+		networkPort = defaultConfig.Port;
 	}
 
 	private void InitializeServer(ServerRoom roomConfiguration) {
@@ -86,18 +94,18 @@ public class MMONetworkManager : NetworkManager {
 				if(i + 1 > args.Length) {
 					Assert.IsTrue(false, "Invalid command paramaters");
 				} else {
-					if(!Int32.TryParse(args[i+1], out m_RoomID)) {
-						m_RoomID = -1;
+					if(!Int32.TryParse(args[i+1], out RoomID)) {
+						RoomID = -1;
 						Assert.IsTrue(false, "Invalid ID");
 					}
 				}
 			}
 		}
-		if(m_RoomID == -1) { //We're a client, not a server
+		if(RoomID == -1) { //We're a client, not a server
 			InitializeClient();
 		}
 		else {
-			var roomID = (int)m_RoomID;
+			var roomID = (int)RoomID;
 			Assert.IsTrue(
 				roomID < m_ServerSettings.ServerRoomConfigurations.Count, 
 				"Invalid Room Configuration Setup"
@@ -106,5 +114,18 @@ public class MMONetworkManager : NetworkManager {
 				m_ServerSettings.ServerRoomConfigurations[roomID]
 			);
 		}
+	}
+
+	private IEnumerator BeamPlayer(int serverID) {
+		StopClient();
+		yield return new WaitForSeconds(1.0f);
+		var config = m_ServerSettings.ServerRoomConfigurations[serverID];
+		networkPort = config.Port;
+		onlineScene = config.HostOnlineScene;
+
+		StartClient();
+	}
+	public void MoveServer(int src, int dst) {
+		StartCoroutine(BeamPlayer(dst));
 	}
 }
